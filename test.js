@@ -1,23 +1,14 @@
-import express from 'express';
-import http from 'http';
+import { sum } from './sum.js';
 
 
-const app = express();
-
-
-app.get('/health', (req, res) => {
-res.json({ status: 'ok' });
-});
-
-
-const server = app.listen(4000, () => {
-http.get('http://localhost:4000/health', res => {
-if (res.statusCode !== 200) {
-throw new Error('Health check failed');
+if (sum(2, 3) !== 5) {
+throw new Error('Test failed: 2 + 3 should be 5');
 }
 
 
-console.log('Test passed');
-server.close();
-});
-});
+if (sum(-1, 1) !== 0) {
+throw new Error('Test failed: -1 + 1 should be 0');
+}
+
+
+console.log('All tests passed');
